@@ -14,7 +14,7 @@ You can configure the type of data sent back by wikipedia. By default, we'll sen
 
 ```WIKIPEDIARAVEL_FORMAT = ```
 
-Possible values are : jsonn, jsonfm (pretty-print in HTML), php, phpfm, rawfm, xml, xmlfm.
+Possible values are : _jsonn_, _jsonfm_ (pretty-print in HTML), _php_, _phpfm_, _rawfm_, _xml_, _xmlfm_.
 
 As for language, default is french.
 To switch to english, add
