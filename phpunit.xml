@@ -16,7 +16,7 @@
     </testsuites>
     <filter>
         <whitelist>
-            <directory suffix=".php">src/</directory>
+            <file suffix=".php">src/Wikipediaravel.php</file>
         </whitelist>
     </filter>
     <logging>
