@@ -5,22 +5,36 @@ namespace EtoileFilante\Wikipediaravel;
 class Wikipediaravel
 {
 
-    private $format, $lang;
+    private $format;
+    private $lang;
+    private $base_url;
+
 
     public function __construct($format, $lang)
     {
         $this->format = $format;
         $this->lang = $lang;
+        $this->base_url = 'https://'.$this->lang.'.wikipedia.org/w/api.php?format='.$this->format.'&';
     }
 
     public function getPage($pageName)
     {
-        return $this->callAPI('GET','https://'.$this->lang.'.wikipedia.org/w/api.php?action=parse&page='.$pageName.'&format='.$this->format.'&prop=wikitext|categories|links|images|externallinks|sections');
+        return $this->callAPI('GET',$this->base_url.'action=parse&page='.urlencode($pageName).'&prop=wikitext|categories|links|images|externallinks|sections');
+    }
+
+    public function getPageCategories($pageName)
+    {
+        return $this->callAPI('GET', $this->base_url.'action=query&titles='.urlencode($pageName).'&prop=categories&cllimit=500');
     }
 
     public function getSubCategories($category, $depth = 1)
     {
-        return $this->callAPI('GET','https://'.$this->lang.'.wikipedia.org/w/api.php?action=categorytree&category='.$category.'&format='.$this->format.'&options={%27depth%27:'.$depth.'}');
+        return $this->callAPI('GET',$this->base_url.'action=categorytree&category='.urlencode($category).'&options={%27depth%27:'.$depth.'}');
+    }
+
+    public function search($query, $limit = 1)
+    {
+        return $this->callAPI('GET', $this->base_url.'action=query&list=search&srsearch='.urlencode($query).'&srlimit='.$limit);
     }
 
     /**
@@ -51,7 +65,7 @@ class Wikipediaravel
             curl_close($curl);
 
             return $result;
-        } catch (\Exception $e)
+        } catch (\Throwable $e)
         {
             trigger_error(sprintf(
                 'Curl failed with error #%d: %s',

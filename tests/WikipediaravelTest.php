@@ -20,6 +20,6 @@ class WikipediaravelTest extends TestCase
 
     public function testGetSubCategories()
     {
-        $this->assertNotNull(json_decode($this->wki->getSubCategories('Astronomie'),true)['categorytree']);
+        $this->assertNotNull(json_decode($this->wki->getSubCategories('Astronomie'),true));
     }
 }

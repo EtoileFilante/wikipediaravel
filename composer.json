@@ -8,7 +8,9 @@
             "email": "nathanael.langlois@liigem.io"
         }
     ],
-    "require": {},
+    "require": {
+      "ext-curl": "*"
+    },
     "require-dev": {
         "phpunit/phpunit": "^7.1",
         "php-coveralls/php-coveralls": "^2.0"
