@@ -5,7 +5,7 @@ php:
 install:
     - composer install
 
-script: phpunit
+script: vendor/bin/phpunit
 
 after_success:
   - travis_retry php vendor/bin/php-coveralls
